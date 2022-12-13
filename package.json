@@ -1,0 +1,42 @@
+{
+  "name": "cloud_mysql_server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.ts",
+  "scripts": {
+    "test": "jest --coverage",
+    "build": "npx tsc",
+    "start": "node dist/index.js",
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/server.js\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xsjark/cloud_mysql_server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xsjark/cloud_mysql_server/issues"
+  },
+  "homepage": "https://github.com/xsjark/cloud_mysql_server#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.27.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.14",
+    "@types/jest": "^29.2.4",
+    "@types/node": "^18.11.14",
+    "@types/supertest": "^2.0.12",
+    "concurrently": "^7.6.0",
+    "jest": "^29.3.1",
+    "nodemon": "^2.0.20",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.0.3",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
+  }
+}
