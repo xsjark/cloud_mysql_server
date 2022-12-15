@@ -7,8 +7,18 @@ const License = db.define('license', {
   city: {
     type: DataTypes.STRING
   },
+  country: {
+    type: DataTypes.STRING
+  },
+  region: {
+    type: DataTypes.STRING
+  },
+  productId: {
+    type: DataTypes.STRING
+  },
 },{
   freezeTableName: true,
+  timestamps: false
 });
 
 
