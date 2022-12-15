@@ -3,11 +3,8 @@ import db from "../config/database";
  
 const { DataTypes }: any = Sequelize;
  
-const Owner = db.define('owner', {
-  email: {
-    type: DataTypes.STRING
-  },
-  displayName: {
+const Product = db.define('product', {
+  productId: {
     type: DataTypes.STRING
   },
 },{
@@ -15,4 +12,5 @@ const Owner = db.define('owner', {
   timestamps: false
 });
 
-export default Owner;
+
+export default Product;

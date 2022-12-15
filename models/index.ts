@@ -1,11 +1,18 @@
 import Feature from "./Feature";
 import License from "./License";
-import Owner from "./Owner";
+import User from "./User";
+import Product from "./Product";
 
-License.hasOne(Owner);
-Owner.belongsTo(License);
+License.belongsTo(User);
+User.hasMany(License);
+
+License.hasOne(User, { foreignKey :"createdBy", as :"CREATED_BY"});
+User.hasOne(License);
 
 License.hasMany(Feature);
 Feature.belongsTo(License)
 
-export { License, Owner, Feature }
+License.hasOne(Product);
+Product.belongsTo(License);
+
+export { License, User, Feature,Product }

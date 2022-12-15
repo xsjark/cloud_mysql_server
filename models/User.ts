@@ -3,11 +3,11 @@ import db from "../config/database";
  
 const { DataTypes }: any = Sequelize;
  
-const Feature = db.define('feature', {
-  quantity: {
-    type: DataTypes.INTEGER
+const User = db.define('user', {
+  email: {
+    type: DataTypes.STRING
   },
-  productId: {
+  displayName: {
     type: DataTypes.STRING
   },
 },{
@@ -15,5 +15,4 @@ const Feature = db.define('feature', {
   timestamps: false
 });
 
-
-export default Feature;
+export default User;

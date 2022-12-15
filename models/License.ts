@@ -16,6 +16,11 @@ const License = db.define('license', {
   productId: {
     type: DataTypes.STRING
   },
+  uid: {
+    type: DataTypes.STRING
+  },
+
+
 },{
   freezeTableName: true,
   timestamps: false
