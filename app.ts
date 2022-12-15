@@ -1,6 +1,6 @@
 import express, { Application, Request, Response, NextFunction } from "express";
 import db from "./config/database";
-import Router from "./routes/routes.js";
+import Router from "./routes/routes";
 import cors from "cors";
 
 const app: Application = express();
@@ -19,5 +19,9 @@ app.use(cors());
 })()
 
 app.use(Router);
+
+setTimeout(()=>{
+    db.sync();
+},1000);
 
 export default app
