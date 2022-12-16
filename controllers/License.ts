@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import { License, User, Feature, Product } from "../models/index"
+import { License, User, Feature, Product, Tax } from "../models/index"
+import TotalAmount from "../models/TotalAmount";
 
 export const placeHolder = async (req: Request, res: Response) => {
     res.status(200).send(200);
@@ -29,14 +30,35 @@ export const createLicense = async (req: Request, res: Response) => {
         })
 
         const createdBy = await User.create({
-            email: req.body.owner.email,
-            displayName: req.body.owner.displayName,
-        })      
+            email: req.body.createdBy.email,
+            displayName: req.body.createdBy.displayName,
+        })    
+
+        const total_amount = await TotalAmount.create({
+            price: req.body.total_amount.price,
+            currency: req.body.total_amount.currency,
+            net_price: req.body.total_amount.net_price,
+            owed: req.body.total_amount.owed,
+            dueDate: req.body.total_amount.dueDate,
+        })  
+
+        const tax = await Tax.create({
+            name: req.body.total_amount.tax.name,
+            basis: req.body.total_amount.tax.basis,
+            value: req.body.total_amount.tax.value,
+            currency: req.body.total_amount.tax.currency,
+        })
 
         await owner.addLicense(license)
         await license.setFeatures(feature)
         await license.setProduct(product)
         await license.setCREATED_BY(createdBy)
+
+        await total_amount.setTax(tax)
+        await license.setTotalamount(total_amount)
+        
+
+
 
         res.send(license);
     } catch (err) {
@@ -47,7 +69,25 @@ export const createLicense = async (req: Request, res: Response) => {
 export const getLicenses = async (req: Request, res: Response) => {
     try {
         const licenses = await License.findAll({
-            include: {all: true}
+            include: [
+                {
+                    model: User
+                },
+                {
+                    model: Feature
+                },
+                {
+                    model: User,
+                    as: "CREATED_BY"
+                },
+                {
+                    model: Product
+                },
+                {
+                    model: TotalAmount,
+                    include: [Tax]
+                },
+            ]
         });
         res.send(licenses);
     } catch (err) {

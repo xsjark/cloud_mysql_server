@@ -2,6 +2,8 @@ import Feature from "./Feature";
 import License from "./License";
 import User from "./User";
 import Product from "./Product";
+import Tax from "./Tax";
+import TotalAmount from "./TotalAmount";
 
 License.belongsTo(User);
 User.hasMany(License);
@@ -15,4 +17,10 @@ Feature.belongsTo(License)
 License.hasOne(Product);
 Product.belongsTo(License);
 
-export { License, User, Feature,Product }
+License.hasOne(TotalAmount);
+TotalAmount.belongsTo(License);
+
+TotalAmount.hasOne(Tax);
+Tax.belongsTo(TotalAmount);
+
+export { License, User, Feature, Product, Tax }

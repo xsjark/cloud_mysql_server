@@ -19,7 +19,15 @@ const License = db.define('license', {
   uid: {
     type: DataTypes.STRING
   },
-
+  updatedAt: {
+    type: DataTypes.DATE
+  },
+  disabledAt: {
+    type: DataTypes.DATE
+  },
+  status: {
+    type: DataTypes.ENUM("PENDING", "CREATED", "DISABLED", "REVOKED", "GIVEN")
+  }
 
 },{
   freezeTableName: true,
